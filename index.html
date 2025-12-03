@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let humanScore = 0;
+        let computerScore = 0;
+
+        console.log('gongaga')
+
+        function getComputerChoice() {
+            let a = Math.floor(Math.random() * 3);
+            console.log(a)
+            switch (a) {
+                case 0:
+                    return "Rock"
+                    break;
+                case 1:
+                    return "Paper"
+                    break;
+                case 2:
+                    return "Scissors"
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        function getHumanChoice() {
+            let choice = prompt("Rock, Paper or Scissors? ")
+            return choice
+        }
+
+        function playRound(humanChoice, computerChoice) {
+
+            humanChoice = humanChoice.toLowerCase()
+            computerChoice = computerChoice.toLowerCase()
+
+            console.log(`Human: ${humanChoice}`)
+            console.log(`Computer: ${computerChoice}\n`)
+
+            if (humanChoice == computerChoice) {
+                console.log("It's a tie...")
+            } else if (humanChoice == "rock" && computerChoice == "paper") {
+                console.log("Computer wins!")
+                ++computerScore;
+            } else if (humanChoice == "rock" && computerChoice == "scissors") {
+                console.log("Human wins!")
+                ++humanScore;
+            } else if (humanChoice == "paper" && computerChoice == "scissors") {
+                console.log("Computer wins!")
+                ++computerScore;
+            } else if (humanChoice == "paper" && computerChoice == "rock") {
+                console.log("Human wins!")
+                ++humanScore;
+            } else if (humanChoice == "scissors" && computerChoice == "rock") {
+                console.log("Computer wins!")
+                ++computerScore;
+            } else if (humanChoice == "scissors" && computerChoice == "paper") {
+                console.log("Human wins!")
+                ++humanScore;
+            }
+
+            console.log(`Current score: Human: ${humanScore} Computer: ${computerScore}`)
+
+
+        }
+
+        function playGame(numberOfRounds) {
+
+            for (let index = 1; index <= numberOfRounds; index++) {
+                playRound(getHumanChoice(), getComputerChoice());
+            }
+
+            if (humanScore == computerScore) {
+                console.log("That's a tie")
+            } else if (humanScore > computerScore) {
+                console.log("Human is the final winnoer")
+            } else {
+                console.log("Computor is the final winnoer")
+            }
+
+        }
+
+        let rounds = +prompt("How many rounds ?")
+
+        playGame(rounds)
+
+    </script>
+</body>
+
+</html>
