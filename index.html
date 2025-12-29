@@ -8,10 +8,53 @@
 </head>
 
 <body>
+
+    <div>
+        <button id="btn1">Rock</button>
+        <button id="btn2">Paper</button>
+        <button id="btn3">Scissors</button>
+    </div>
+    <div class="result">
+        <p>Round: <span id="round"></span> </p>
+        <p>Round result: <span id="roundResult"></span> </p>
+        <p>Human: <span id="human"></span> </p>
+        <p>Computer: <span id="computer"></span> </p>
+        <span id="winner"></span>
+    </div>
+
     <script>
 
         let humanScore = 0;
         let computerScore = 0;
+        let roundNr = 1;
+
+        const round = document.querySelector('#round');
+        const roundResult = document.querySelector('#roundResult');
+        const human = document.querySelector('#human');
+        const computer = document.querySelector('#computer');
+        const buttons = document.querySelectorAll("button");
+        const winner = document.querySelector('#winner');
+        round.textContent = roundNr;
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                // body
+                switch (e.target.id) {
+                    case 'btn1':
+                        playRound("rock", getComputerChoice())
+                        break;
+                    case 'btn2':
+                        playRound('paper', getComputerChoice())
+                        break;
+                    case 'btn3':
+                        playRound('scissors', getComputerChoice())
+                        break;
+                }
+            });
+        });
+
+
+
 
         console.log('gongaga')
 
@@ -44,32 +87,51 @@
             humanChoice = humanChoice.toLowerCase()
             computerChoice = computerChoice.toLowerCase()
 
+            /*
             console.log(`Human: ${humanChoice}`)
             console.log(`Computer: ${computerChoice}\n`)
-
+            */
             if (humanChoice == computerChoice) {
                 console.log("It's a tie...")
+                roundResult.textContent = "It's a tie...";
             } else if (humanChoice == "rock" && computerChoice == "paper") {
                 console.log("Computer wins!")
+                roundResult.textContent = "Computer wins oh yeah";
                 ++computerScore;
             } else if (humanChoice == "rock" && computerChoice == "scissors") {
                 console.log("Human wins!")
+                roundResult.textContent = "Human wins oh yeah";
                 ++humanScore;
             } else if (humanChoice == "paper" && computerChoice == "scissors") {
                 console.log("Computer wins!")
+                roundResult.textContent = "Computer wins oh yeah";
                 ++computerScore;
             } else if (humanChoice == "paper" && computerChoice == "rock") {
                 console.log("Human wins!")
+                roundResult.textContent = "Human wins oh yeah";
                 ++humanScore;
             } else if (humanChoice == "scissors" && computerChoice == "rock") {
                 console.log("Computer wins!")
+                roundResult.textContent = "Computer wins oh yeah";
                 ++computerScore;
             } else if (humanChoice == "scissors" && computerChoice == "paper") {
                 console.log("Human wins!")
+                roundResult.textContent = "Human wins oh yeah";
                 ++humanScore;
             }
 
             console.log(`Current score: Human: ${humanScore} Computer: ${computerScore}`)
+
+            if (humanScore == 5) {
+                winner.textContent = "Human is the final winner";
+
+            } else if (computerScore == 5) {
+                winner.textContent = "Computor is the final winner"
+            }
+            roundNr++;
+            round.textContent = roundNr;
+            human.textContent = humanScore;
+            computer.textContent = computerScore;
 
 
         }
@@ -90,9 +152,9 @@
 
         }
 
-        let rounds = +prompt("How many rounds ?")
+        //let rounds = +prompt("How many rounds ?")
 
-        playGame(rounds)
+        //playGame(1)
 
     </script>
 </body>
